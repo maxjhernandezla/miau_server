@@ -1,11 +1,19 @@
 import Router from "./router.js";
-import * as soundController from '../controllers/sound.controller.js'
-class SoundRouter extends Router
+import * as soundsController from '../controllers/sounds.controller.js'
+import authentication from "../middlewares/authentication.js";
+
+class SoundsRouter extends Router
 {
     init()
     {
-        this.router.get('/', soundController.reproduce)
+        this.router.get('/', authentication, soundsController.getSounds)
+        this.router.get('/:sid', authentication, soundsController.getSoundById)
+        this.router.get('/reproduce/:sid', authentication, soundsController.reproduce)
+        this.router.post('/create', authentication, soundsController.createSound)
+        this.router.put('/update/:sid', authentication, soundsController.updateSound)
+        this.router.delete('/delete/:sid', authentication, soundsController.deleteSound)
     }
+
 }
 
-export default SoundRouter;
+export default SoundsRouter;

@@ -46,6 +46,11 @@ const ownerOwnsCat = (owner_id, user_id) =>
     if (owner_id !== user_id) throw new Error('You are not authorized to perform this')
 }
 
+const userIsAdmin = (user) =>
+{
+    if (user.role.toLowerCase() !== 'admin') throw new Error('Not authorized')
+}
+
 // const tokenExpired = (token) => {
 //   const currentTime = Math.floor(Date.now() / 1000);
 //   if (token.exp && currentTime >= token.exp) {
@@ -61,4 +66,4 @@ const ownerOwnsCat = (owner_id, user_id) =>
 //   }
 // };
 
-export { createHash, isValidPassword, generateToken, verifyToken, ownerOwnsCat }
+export { createHash, isValidPassword, generateToken, verifyToken, ownerOwnsCat, userIsAdmin }

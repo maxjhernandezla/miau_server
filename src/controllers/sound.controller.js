@@ -25,7 +25,8 @@ const reproduce = async (req, res) =>
     }
 }
 
+
 export
 {
-    reproduce
+    reproduce,
 }

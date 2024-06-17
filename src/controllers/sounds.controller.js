@@ -67,14 +67,11 @@ const reproduce = async (req, res) =>
 {
     try
     {
-        const result = await soundsService.reproduce();
+        const sid = req.params.sid;
+        const result = await soundsService.reproduce(sid);
         // Configurar el tipo de contenido
         res.setHeader('Content-Type', 'audio/mpeg');
-
-        // ms.pipe(req, res, response.data.responseUrl);
-
         result.audioStream.pipe(res);
-        res.json(result.sound)
     } catch (error)
     {
         console.error(error.message);

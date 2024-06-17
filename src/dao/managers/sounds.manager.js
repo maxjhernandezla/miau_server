@@ -8,7 +8,7 @@ const create = async (sound) =>
 
 const findByIdAndUpdate = async (sid, sound) =>
 {
-    const result = await soundModel.findByIdAndUpdate(sid, sound);
+    const result = await soundModel.findByIdAndUpdate(sid, sound, { new: true }).lean();
     return result;
 }
 

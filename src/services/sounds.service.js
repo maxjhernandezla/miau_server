@@ -17,7 +17,7 @@ const getSoundById = async (sid) => {
 
 const createSound = async (sound, user) => {
     // userIsAdmin(user);
-    const newSound = await soundsManager.createSound(sound);
+    const newSound = await soundsManager.create(sound);
     if (!newSound) throw new Error('Sound not created')
     return newSound;
 }
@@ -41,14 +41,15 @@ const reproduce = async (sid) =>
     try
     {
         const sound = await getSoundById(sid);
+
         // Hacer la solicitud para obtener el archivo como stream
         const response = await axios({
             url: sound.url,
             method: 'GET',
             responseType: 'stream'
         });
-
-        return {audioStream: response.data, sound}; // Devolver el stream de datos
+        if (!response) throw new Error('An error occurred while retrieving the audio')
+        return {audioStream: response.data, sound: sound} // Devolver el stream de datos
     } catch (error)
     {
         if (error.response && error.response.status === 404)

@@ -5,11 +5,10 @@ const authentication = (req, res, next) =>
     const authHeader = req.headers['authorization'];
     const token = authHeader && authHeader.split(' ')[1];
     if (!token) return res.sendStatus(401); // No token found in the request
-
     try
     {
         const decoded = verifyToken(token);
-        req.user = decoded;
+        req.user = decoded.user;
         next();
     } catch (error)
     {

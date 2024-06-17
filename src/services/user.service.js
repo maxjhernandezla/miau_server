@@ -48,7 +48,6 @@ const getUserById = async (id) =>
 
 const findByIdAndUpdate = async (id, params) =>
 {
-    console.log(params);
     const user = await userDbManager.findByIdAndUpdate(id, params);
     if (!user) throw new Error('User not found');
     return user

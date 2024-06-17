@@ -41,6 +41,11 @@ const verifyToken = (token) =>
     }
 };
 
+const ownerOwnsCat = (owner_id, user_id) =>
+{
+    if (owner_id !== user_id) throw new Error('You are not authorized to perform this')
+}
+
 // const tokenExpired = (token) => {
 //   const currentTime = Math.floor(Date.now() / 1000);
 //   if (token.exp && currentTime >= token.exp) {
@@ -56,4 +61,4 @@ const verifyToken = (token) =>
 //   }
 // };
 
-export { createHash, isValidPassword, generateToken, verifyToken }
+export { createHash, isValidPassword, generateToken, verifyToken, ownerOwnsCat }

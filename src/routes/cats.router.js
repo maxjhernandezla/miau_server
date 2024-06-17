@@ -1,12 +1,15 @@
 import Router from './router.js'
 import * as catsController from '../controllers/cats.controller.js'
+import authentication from '../middlewares/authentication.js';
 
 class CatsRouter extends Router
 {
     init()
     {
-        // this.router.get('/', catsController.getCats)
-        this.router.post('/create', catsController.createCat)
+        this.router.get('/', authentication, catsController.getCats)
+        this.router.post('/create', authentication, catsController.createCat)
+        this.router.put('/update/:cid', authentication, catsController.updateCat)
+        this.router.delete('/delete/:cid', authentication, catsController.deleteCat)
     }
 }
 

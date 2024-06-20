@@ -8,6 +8,7 @@ const create = async (cat) =>
 
 const find = async (params) =>
 {
+
     const result = await catModel.find(params).lean();
     return result.map(cat => ({
         ...cat,
@@ -26,7 +27,6 @@ const findById = async (cid) =>
 const findByIdAndDelete = async (cid) =>
 {
     const result = await catModel.findByIdAndDelete(cid);
-    console.log(result);
     return result.toJSON()
 }
 

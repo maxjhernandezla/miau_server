@@ -5,25 +5,29 @@ const catCollection = "cat";
 const catSchema = new mongoose.Schema({
     name: {
         type: String,
-        require: true,
+        required: true,
     },
-    birth_day: {
+    birthday: {
         type: Date,
-        require: true,
+        required: true,
+    },
+    type: {
+        type: String,
+        required: true,
     },
     gender: {
         type: String,
-        enum: ['male', 'female'], // Solo permite 'male' o 'female'
-        require: true
+        enum: ['male', 'female'],
+        required: true
     },
     neutered: {
         type: String,
         enum: ['yes', 'no'],
-        require: true
+        required: true
     },
     owner_id: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "users", // Nombre de la colección de usuarios
+        ref: "users",
     },
 });
 

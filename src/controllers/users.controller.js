@@ -1,11 +1,11 @@
-import * as userService from '../services/user.service.js';
+import * as usersService from '../services/users.service.js';
 
 const login = async (req, res) =>
 {
     try
     {
         const { email, password } = req.body;
-        const { user, accessToken } = await userService.login(email, password);
+        const { user, accessToken } = await usersService.login(email, password);
         res.send({ user, accessToken });
     } catch (error)
     {
@@ -18,7 +18,7 @@ const register = async (req, res) =>
     try
     {
         const { email, password } = req.body;
-        const user = await userService.createUser(email, password);
+        const user = await usersService.createUser(email, password);
         res.status(201).json(user);
     } catch (error)
     {

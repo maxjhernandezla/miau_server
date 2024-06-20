@@ -12,6 +12,19 @@ const getCats = async (req, res) =>
     }
 }
 
+const getCatById = async (req, res) =>
+{
+    try
+    {
+        const cid = req.params.cid;
+        const cats = await catsService.getCatById(cid, req.user)
+        res.status(200).send(cats)
+    } catch (error)
+    {
+        res.status(500).send({ message: error.message })
+    }
+}
+
 const createCat = async (req, res) =>
 {
     try
@@ -54,4 +67,4 @@ const deleteCat = async (req, res) =>
     }
 }
 
-export { createCat, getCats, updateCat, deleteCat }
+export { createCat, getCats, updateCat, deleteCat, getCatById }

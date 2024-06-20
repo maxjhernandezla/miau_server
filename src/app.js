@@ -1,8 +1,8 @@
 import express from 'express';
 import cors from 'cors';
 import './config/dotenv.config.js';
-import SoundsRouter from './routes/sound.router.js';
-import UserRouter from './routes/user.router.js';
+import SoundsRouter from './routes/sounds.router.js';
+import UsersRouter from './routes/users.router.js';
 import CatsRouter from './routes/cats.router.js'
 import './dao/db.config.js'
 
@@ -15,11 +15,11 @@ app.use(cors());
 // Routes
 
 const soundsRouter = new SoundsRouter();
-const userRouter = new UserRouter();
+const usersRouter = new UsersRouter();
 const catsRouter = new CatsRouter();
 
 app.use('/api/sounds', soundsRouter.getRouter())
-app.use('/api/users', userRouter.getRouter())
+app.use('/api/users', usersRouter.getRouter())
 app.use('/api/cats', catsRouter.getRouter())
 
 app.listen(process.env.PORT, () =>

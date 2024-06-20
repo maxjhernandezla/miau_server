@@ -7,6 +7,7 @@ class CatsRouter extends Router
     init()
     {
         this.router.get('/', authentication, catsController.getCats)
+        this.router.get('/:cid', authentication, catsController.getCatById)
         this.router.post('/create', authentication, catsController.createCat)
         this.router.put('/update/:cid', authentication, catsController.updateCat)
         this.router.delete('/delete/:cid', authentication, catsController.deleteCat)

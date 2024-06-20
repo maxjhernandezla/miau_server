@@ -1,12 +1,15 @@
 import * as catsManager from '../dao/managers/cats.manager.js'
-import * as userService from '../services/user.service.js'
+import * as userService from '../services/users.service.js'
 import * as utils from '../utils/utils.js'
+import { format } from 'date-fns'
+
 const createCat = async (cat, user) =>
 {
+    const formattedBirthday = format(new Date(cat.birthday), 'yyyy-MM-dd');
     const newCat = {
-        ...cat, birth_day: new Date(), owner_id: user._id
+        ...cat, birthday: formattedBirthday, owner_id: user._id
     }
-    const result = await catsManager.create(cat)
+    const result = await catsManager.create(newCat);
 
     await userService.findByIdAndUpdate(newCat.owner_id, { $push: { cats: result._id } })
 
@@ -19,19 +22,19 @@ const getCats = async (user) =>
     return cats
 }
 
-const updateCat = async (cid, cat, user) =>
+const updateCat = async (cid, cat) =>
 {
-    const catById = await getCatById(cid);
-    utils.ownerOwnsCat(catById.owner_id, user._id);
+    await getCatById(cid);
     const updatedCat = await catsManager.findByIdAndUpdate(cid, cat, { new: true });
     return updatedCat
 }
 
-const getCatById = async (cid) =>
+const getCatById = async (cid, user) =>
 {
-    const cat = await catsManager.findById(cid)
-    if (!cat) throw new Error('Cat not found')
-    return cat
+    const catById = await catsManager.findById(cid)
+    if (!catById) throw new Error('Cat not found')
+    utils.ownerOwnsCat(catById.owner_id, user._id)
+    return catById
 }
 
 const deleteCat = async (cid, user) =>

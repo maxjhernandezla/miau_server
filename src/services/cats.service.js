@@ -22,13 +22,6 @@ const getCats = async (user) =>
     return cats
 }
 
-const updateCat = async (cid, cat) =>
-{
-    await getCatById(cid);
-    const updatedCat = await catsManager.findByIdAndUpdate(cid, cat, { new: true });
-    return updatedCat
-}
-
 const getCatById = async (cid, user) =>
 {
     const catById = await catsManager.findById(cid)
@@ -37,10 +30,16 @@ const getCatById = async (cid, user) =>
     return catById
 }
 
+const updateCat = async (cid, cat, user) =>
+{
+    const response = await getCatById(cid, user);
+    const updatedCat = await catsManager.findByIdAndUpdate(cid, cat, { new: true });
+    return updatedCat
+}
+
 const deleteCat = async (cid, user) =>
 {
-    const catById = await getCatById(cid);
-    utils.ownerOwnsCat(catById.owner_id, user._id);
+    const catById = await getCatById(cid, user);
     const deleted = await catsManager.findByIdAndDelete(cid);
     return deleted
 }

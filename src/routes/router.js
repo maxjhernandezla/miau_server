@@ -55,7 +55,6 @@ export default class Router
     // handlePolicies = (policies) => async (req, res, next) =>
     // {
     //     if (policies[0] === "PUBLIC") return next();
-    //     console.log('hey');
     //     try 
     //     {
     //         // Aplica la autenticación

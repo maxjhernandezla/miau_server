@@ -28,4 +28,35 @@ const register = async (req, res) =>
 
 }
 
-export { login, register }
+const getUserById = async (req, res) =>
+{
+    try
+    {
+        const uid = req.params.uid;
+        const user = await usersService.getUserById(uid);
+        delete user.password;
+        delete user.cats;
+        res.status(200).json(user)
+    } catch (error)
+    {
+        res.status(500).json({ message: error.message });
+
+    }
+}
+
+const updateUser = async (req, res) =>
+{
+    try
+    {
+        const uid = req.params.uid;
+        const user = req.body;
+        const updatedUser = await usersService.findByIdAndUpdate(uid, user)
+        res.status(200).json(updatedUser)
+    } catch (error)
+    {
+        res.status(500).json({ message: error.message });
+
+    }
+}
+
+export { login, register, getUserById, updateUser }

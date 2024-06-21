@@ -16,6 +16,19 @@ const userSchema = new mongoose.Schema({
         type: String,
         default: "user",
     },
+    name: {
+        type: String,
+    },
+    surname: {
+        type: String,
+    },
+    working_from: {
+        type: String,
+        enum: ["home", "office", "hybrid"]
+    },
+    address: {
+        type: String,
+    },
     cats: [
         {
             type: mongoose.Schema.Types.ObjectId,

@@ -1,6 +1,7 @@
 import { createHash, generateToken, isValidPassword } from "../utils/utils.js";
 import * as usersDbManager from '../dao/managers/users.manager.js'
-import UserDto from "../dto/user.dto.js";
+import LoginUserDto from "../dto/loginUser.dto.js";
+import UserDto from '../dto/user.dto.js'
 
 const createUser = async (email, password) =>
 {
@@ -18,7 +19,7 @@ const login = async (email, password) =>
     if (!email || !password) throw new Error('Incomplete credentials');
     const user = await getUserByEmail(email);
     isValidPassword(password, user)
-    const userDto = new UserDto(user);
+    const userDto = new LoginUserDto(user);
     const accessToken = generateToken(userDto);
     return { accessToken, user: userDto };
 }
@@ -39,19 +40,19 @@ const getUserByEmail = async (email) =>
     return user
 }
 
-const getUserById = async (id) =>
+const getUserById = async (uid) =>
 {
-    const user = await usersDbManager.findById(id);
+    const user = await usersDbManager.findById(uid);
     if (!user) throw new Error('User not found')
     return user
 }
 
-const findByIdAndUpdate = async (id, params) =>
+const findByIdAndUpdate = async (uid, params) =>
 {
-    const user = await usersDbManager.findByIdAndUpdate(id, params);
-    if (!user) throw new Error('User not found');
-    return user
+    await getUserById(uid);
+    const updatedUser = await usersDbManager.findByIdAndUpdate(uid, params);
+    const userDto = new UserDto(updatedUser)
+    return userDto
 }
-
 
 export { createUser, getUserByEmailRegister, login, getUserByEmail, getUserById, findByIdAndUpdate }

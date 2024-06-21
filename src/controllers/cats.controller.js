@@ -46,6 +46,7 @@ const updateCat = async (req, res) =>
     {
         const cid = req.params.cid;
         const cat = req.body;
+
         const updatedCat = await catsService.updateCat(cid, cat, req.user);
         res.status(200).json(updatedCat);
     } catch (error)

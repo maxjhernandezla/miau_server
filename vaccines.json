@@ -1,0 +1,38 @@
+[
+  {
+    "name": "Rabies",
+    "description": "Prevents rabies, a deadly and zoonotic disease.",
+    "first_dose": 12,
+    "first_dose_description": "From 12 weeks.",
+    "boosters": 12,
+    "boosters_description": "Annually."
+  },
+  {
+    "name": "Trivalent",
+    "description": "Against Rhinotracheitis, Calicivirus, and Panleukopenia.",
+    "first_dose": 8,
+    "first_dose_description": "Between the eighth and ninth week of life.",
+    "boosters": 12,
+    "boosters_description": "Three or four weeks after the first dose. Then, annually."
+  },
+  {
+    "name": "Feline Leukemia",
+    "description": "Protects against feline leukemia virus, causing immunosuppression.",
+    "first_dose": 8,
+    "first_dose_description": "Recommended in the first months of life.",
+    "boosters": 12,
+    "boosters_description": "As advised by the veterinarian, generally annually."
+  },
+  {
+    "name": "Feline Immunodeficiency Virus (FIV)",
+    "description": "Protects against feline immunodeficiency virus.",
+    "first_dose_description": "Based on the risk of exposure.",
+    "boosters_description": "As advised by the veterinarian."
+  },
+  {
+    "name": "Chlamydia felis",
+    "description": "Protects against Chlamydia felis infection, causing respiratory issues.",
+    "first_dose_description": "Based on the risk of exposure.",
+    "boosters_description": "As advised by the veterinarian."
+  }
+]

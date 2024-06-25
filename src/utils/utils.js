@@ -1,5 +1,6 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import { format } from 'date-fns'
 // import { EmailNotMatchToken, ExpiredJWT } from "./custom-exceptions.js";
 
 const createHash = (password) =>
@@ -51,6 +52,40 @@ const userIsAdmin = (user) =>
     if (user.role.toLowerCase() !== 'admin') throw new Error('Not authorized')
 }
 
+const nextDueDate = (date, months) =>
+{
+    const newDate = new Date(date);
+    const dayOfMonth = newDate.getDate();
+    newDate.setMonth(newDate.getMonth() + months);
+
+    // Ajuste del día del mes si el nuevo mes no tiene suficientes días
+    if (newDate.getDate() < dayOfMonth)
+    {
+        newDate.setDate(0); // Ajusta al último día del mes anterior
+    }
+
+    return formatDate(newDate);
+};
+
+const formatDate = (date) =>
+{
+    const formattedDate = format(new Date(date), 'yyyy-MM-dd');
+
+    return new Date(formattedDate)
+}
+
+const catHasVaccine = (cat, vid) =>
+{
+    if (!cat.vaccinations.some(vac => vac._id.toString() === vid))
+        throw new Error('The cat does not have this vaccine')
+}
+
+const removeVaccine = (cat, vid) =>
+{
+    cat.vaccinations = cat.vaccinations.filter(vac => vac._id.toString() !== vid)
+    return cat
+}
+
 // const tokenExpired = (token) => {
 //   const currentTime = Math.floor(Date.now() / 1000);
 //   if (token.exp && currentTime >= token.exp) {
@@ -66,4 +101,4 @@ const userIsAdmin = (user) =>
 //   }
 // };
 
-export { createHash, isValidPassword, generateToken, verifyToken, ownerOwnsCat, userIsAdmin }
+export { createHash, isValidPassword, generateToken, verifyToken, ownerOwnsCat, userIsAdmin, nextDueDate, formatDate, catHasVaccine, removeVaccine }

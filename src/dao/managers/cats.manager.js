@@ -35,4 +35,5 @@ const findByIdAndUpdate = async (cid, cat) =>
     const result = await catModel.findByIdAndUpdate({ _id: cid }, cat, { new: true }).lean();
     return { ...result, _id: result._id.toString(), owner_id: result.owner_id.toString() };
 };
+
 export { create, find, findById, findByIdAndUpdate, findByIdAndDelete }

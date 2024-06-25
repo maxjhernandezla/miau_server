@@ -11,6 +11,10 @@ class CatsRouter extends Router
         this.router.post('/create', authentication, catsController.createCat)
         this.router.put('/update/:cid', authentication, catsController.updateCat)
         this.router.delete('/delete/:cid', authentication, catsController.deleteCat)
+        this.router.get('/:cid/vaccines', authentication, catsController.getCatVaccinations)
+        this.router.post('/:cid/vaccines/:vid', authentication, catsController.addVaccineToCat)
+        this.router.delete('/:cid/vaccines/:vid', authentication, catsController.deleteVaccineFromCat)
+        this.router.put('/:cid/vaccines/:vid', authentication, catsController.updateVaccineFromCat)
     }
 }
 

@@ -1,4 +1,4 @@
-import soundModel from "../models/sound.model.js";
+import soundModel from "../models/sounds.model.js";
 
 const create = async (sound) =>
 {

@@ -29,6 +29,44 @@ const catSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "users",
     },
+    vaccinations: [
+        {
+            vaccine_id: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "vaccines",
+                required: true
+            },
+            date: {
+                type: Date,
+                required: true
+            },
+            vet_name: {
+                type: String,
+                required: true
+            },
+            next_due_date: {
+                type: Date
+            }
+        }
+    ]
+});
+
+catSchema.pre('find', function (next)
+{
+    this.populate(['vaccinations', 'vaccinations.vaccine_id']);
+    next();
+});
+
+catSchema.pre('findOne', function (next)
+{
+    this.populate(['vaccinations', 'vaccinations.vaccine_id']);
+    next();
+});
+
+catSchema.pre('findById', function (next)
+{
+    this.populate('vaccinations');
+    next();
 });
 
 const catModel = mongoose.model(catCollection, catSchema);

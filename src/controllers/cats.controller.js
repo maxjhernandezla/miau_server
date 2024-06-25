@@ -68,4 +68,67 @@ const deleteCat = async (req, res) =>
     }
 }
 
-export { createCat, getCats, updateCat, deleteCat, getCatById }
+const getCatVaccinations = async (req, res) =>
+{
+    try
+    {
+        const cid = req.params.cid;
+        const vaccines = await catsService.getCatVaccinations(cid, req.user);
+        res.status(200).json(vaccines);
+    } catch (error)
+    {
+        res.status(500).send({ message: error.message })
+
+    }
+}
+
+const addVaccineToCat = async (req, res) =>
+{
+    try
+    {
+        const cid = req.params.cid;
+        const vid = req.params.vid;
+        const vaccine = req.body;
+        const result = await catsService.addVaccineToCat(cid, vid, vaccine, req.user);
+        res.status(201).json(result);
+    } catch (error)
+    {
+        res.status(500).send({ message: error.message })
+
+    }
+}
+
+const deleteVaccineFromCat = async (req, res) =>
+{
+    try
+    {
+        const cid = req.params.cid;
+        const vid = req.params.vid;
+        const result = await catsService.deleteVaccineFromCat(cid, vid, req.user);
+        res.status(204).json(result)
+    } catch (error)
+    {
+        res.status(500).send({ message: error.message })
+
+    }
+}
+
+const updateVaccineFromCat = async (req, res) =>
+{
+    try
+    {
+        const cid = req.params.cid;
+        const vid = req.params.vid;
+        const vaccine = req.body;
+        const result = await catsService.updateVaccineFromCat(cid, vid, vaccine, req.user)
+        res.status(200).json(result)
+    } catch (error)
+    {
+        res.status(500).send({ message: error.message })
+
+    }
+}
+
+
+
+export { createCat, getCats, updateCat, deleteCat, getCatById, getCatVaccinations, updateVaccineFromCat, deleteVaccineFromCat, addVaccineToCat }

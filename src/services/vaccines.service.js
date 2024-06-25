@@ -10,6 +10,7 @@ const getVaccineById = async (vid) =>
 {
     const result = await vaccinesManager.findById(vid)
     if (!result) throw new Error('Vaccine not found')
+    return result
 }
 const getVaccines = async (params) =>
 {

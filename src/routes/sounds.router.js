@@ -1,7 +1,6 @@
-import Router from "./router.js";
+import authentication from '../middlewares/authentication.js';
+import Router from './router.js'
 import * as soundsController from '../controllers/sounds.controller.js'
-import authentication from "../middlewares/authentication.js";
-
 class SoundsRouter extends Router
 {
     init()

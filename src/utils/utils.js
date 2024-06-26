@@ -15,7 +15,7 @@ const isValidPassword = (password, user) =>
 
 const generateToken = (user) =>
 {
-    const token = jwt.sign({ user }, process.env.PRIVATE_KEY, { expiresIn: "24h" });
+    const token = jwt.sign({ user }, process.env.PRIVATE_KEY, { expiresIn: "1h" });
     return token;
 };
 

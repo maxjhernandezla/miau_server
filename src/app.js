@@ -6,7 +6,7 @@ import UsersRouter from './routes/users.router.js';
 import CatsRouter from './routes/cats.router.js'
 import VaccinesRouter from './routes/vaccines.router.js';
 import SoundsRouter from './routes/sounds.router.js';
-
+import SessionsRouter from './routes/sessions.router.js';
 import './dao/db.config.js'
 
 const app = express();
@@ -22,12 +22,14 @@ const usersRouter = new UsersRouter();
 const catsRouter = new CatsRouter();
 const vaccinesRouter = new VaccinesRouter();
 const soundsRouter = new SoundsRouter();
+const sessionsRouter = new SessionsRouter()
 
 app.use('/api/calls', callsRouter.getRouter())
 app.use('/api/users', usersRouter.getRouter())
 app.use('/api/cats', catsRouter.getRouter())
 app.use('/api/sounds', soundsRouter.getRouter())
 app.use('/api/vaccines', vaccinesRouter.getRouter())
+app.use('/api/sessions', sessionsRouter.getRouter())
 
 
 app.listen(process.env.PORT, () =>

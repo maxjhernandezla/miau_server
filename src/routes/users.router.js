@@ -10,7 +10,6 @@ class UserRouter extends Router
         this.router.post('/register', usersController.register)
         this.router.get('/:uid', authentication, usersController.getUserById)
         this.router.put('/update/:uid', authentication, usersController.updateUser)
-
     }
 }
 

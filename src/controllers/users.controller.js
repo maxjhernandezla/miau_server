@@ -59,4 +59,6 @@ const updateUser = async (req, res) =>
     }
 }
 
+
+
 export { login, register, getUserById, updateUser }

@@ -63,7 +63,7 @@ const nextDueDate = (date, months) =>
     {
         newDate.setDate(0); // Ajusta al último día del mes anterior
     }
-
+    console.log(newDate);
     return formatDate(newDate);
 };
 

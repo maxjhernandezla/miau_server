@@ -49,9 +49,12 @@ const addVaccineToCat = async (cid, vid, vaccine, user) =>
 {
     await getCatById(cid, user);
     const vaccineById = await vaccinesService.getVaccineById(vid);
-    const next_due_date = utils.nextDueDate(vaccine.date, vaccineById.boosters)
+    if (vaccineById.boosters)
+    {
+        const next_due_date = utils.nextDueDate(vaccine.date, vaccineById.boosters)
+        vaccine.next_due_date = next_due_date;
+    }
     vaccine.vaccine_id = vid;
-    vaccine.next_due_date = next_due_date;
     const updatedCat = await catsManager.findByIdAndUpdate(cid, { $push: { vaccinations: vaccine } })
     return updatedCat
 }
